@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS -->
+    <!-- Bootstrap CSS
+    ============================================ -->
+    <link rel="stylesheet" type="text/css" href="../../static/souye/css/bootstrap.min.css">
+    <!-- Icon Font CSS
+    ============================================ -->
+    <link rel="stylesheet" type="text/css" href="../../static/souye/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="../../static/souye/css/font-awesome.min.css">
+    <!-- Plugins CSS
+    ============================================ -->
+    <link rel="stylesheet" type="text/css" href="../../static/souye/css/plugins.css">
+    <!-- Style CSS
+    ============================================ -->
+    <link rel="stylesheet" type="text/css" href="../../static/souye/css/style.css">
+    <!-- Modernizer JS
+    ============================================ -->
+    <script src="../../static/souye/js/vendor/modernizr-2.8.3.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../static/jiemian2/css/style.default.css">
+
+    <link rel="stylesheet" th:href="@{/webjars/mdui/dist/css/mdui.css}">
+    <script src="../static/login/js/jquery.min.js"></script>
+    <script th:src="@{/webjars/mdui/dist/js/mdui.js}"></script>
+    <style type="text/css">
+        #div{
+            width: 100%;
+            height: 500px;
+            overflow-x: hidden;
+            overflow-y: scroll;
+
+        }
+        #div::-webkit-scrollbar{
+            display: none;
+        }
+
+    </style>
+
+
+</head>
+
+<body class="mdui-theme-primary-indigo mdui-theme-accent-pink">
+
+<!-- Header Bottom Start -->
+<div class="header-bottom">
+
+    <!---- Menu ---->
+    <div id="main-menu" class="main-menu onepage-nav collapse navbar-collapse float-right">
+        <nav>
+            <ul>
+                <li ><a th:href="@{home}">首页</a></li>
+                <li><a th:href="@{MessageList}">消息<div class="badge badge-warning">[[${count}]] New</div></a></li>
+                <li><a href="Personordmanager">订单</a></li>
+                <li><a href="findChildMessage">动态</a></li>
+                <li><a href="userInfo">个人中心</a></li>
+
+
+            </ul>
+        </nav>
+    </div>
+
+
+    <div class="page_content clearfix mb15 table-module " id="div">
+        <div style="width: 100%;height: 10px;background: #9fcdff;margin-bottom: 5px"><div style="width: 100%;height: 10px;background: #9fcdff;margin-bottom: 5px"></div>
+        <div style="width: 100%;" th:if="${not#lists.isEmpty(list1)}">
+            <div th:each="li:${list1}" style="width: 100%">
+                <div style="height: 50px;width: 100%;">
+                    <span style="margin-left: 30px">[[${li.getSenderid()}]] :  [[${li.getMessages()}]]</span><div style="float: right"><div class="badge badge-warning">New</div><a th:href="@{chats1(fr=${li.getSenderid()},to=${li.getReceiveid()})}" style="color: #5bc0de">查看</a>&nbsp;&nbsp;<a th:href="@{deletechats1(fr=${li.getSenderid()},to=${li.getReceiveid()})}" style="color: #5bc0de">删除</a></div>
+                </div>
+                <div style="width: 100%;height: 10px;background: #9fcdff">
+
+                </div>
+
+            </div>
+
+        </div>
+        <div style="width: 100%" th:if="${not#lists.isEmpty(list2)}">
+            <div th:each="li:${list2}" style="width: 100%">
+                <div style="height: 50px;width: 100%">
+                    <span style="margin-left: 30px">[[${li.getSenderid()}]] :  [[${li.getMessages()}]]</span><div style="float: right"><a th:href="@{chats1(fr=${li.getSenderid()},to=${li.getReceiveid()})}" style="color: #5bc0de">查看</a>&nbsp;&nbsp;<a th:href="@{deletechats1(fr=${li.getSenderid()},to=${li.getReceiveid()})}" style="color: #5bc0de">删除</a></div>
+                </div>
+                <div style="width: 100%;height: 10px;background: #9fcdff">
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+<!-- JS -->
+
+<!-- jQuery JS
+============================================ -->
+<script src="../../static/souye/js/vendor/jquery-1.12.0.min.js"></script>
+<!-- Bootstrap JS
+============================================ -->
+<script src="../../static/souye/js/bootstrap.min.js"></script>
+<!-- Plugins JS
+============================================ -->
+<script src="../../static/souye/js/plugins.js"></script>
+<!-- Ajax Mail JS
+============================================ -->
+<script src="../../static/souye/js/ajax-mail.js"></script>
+<!-- Main JS
+============================================ -->
+<script src="../../static/souye/js/main.js"></script>
+
+
+</body>
+</html>
+
+

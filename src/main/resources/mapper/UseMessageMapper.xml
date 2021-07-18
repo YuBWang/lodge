@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jmu.lodgesystem.dao.UseMessageMapper">
+    <insert id="insertInfo" parameterType="com.jmu.lodgesystem.entity.UseMessage">
+       insert into UseMessage(account,userid,username,phone,childname,sex,age,school,grades,classes,status) values (#{account},#{userid},#{username},#{phone},#{childname},#{sex},#{age},#{school},#{grades},#{classes},#{status})
+   </insert>
+    <update id="updateInfo" parameterType="com.jmu.lodgesystem.entity.UseMessage">
+        update UseMessage set account=#{account},userid=#{userid},username=#{username},phone=#{phone},childname=#{childname},sex=#{sex},age=#{age},school=#{school},grades=#{grades},classes=#{classes},status=#{status} where  userid=#{userid}
+    </update>
+    <select id="findByuseid"  parameterType="String" resultType="com.jmu.lodgesystem.entity.UseMessage">
+        select * from UseMessage where account=#{id}
+    </select>
+    <select id="findByuseid1" parameterType="String" resultType="com.jmu.lodgesystem.entity.UseMessage">
+        select * from UseMessage where userid=#{id}
+    </select>
+    <select id="findAgeCount" resultType="int">
+        SELECT count(age) from UseMessage where userid in (SELECT userid from Orderlist where storeid=#{id} and Orderlist.`status` in (1,2)) and age BETWEEN #{low} and #{hight}
+    </select>
+    <select id="findSexCount"  resultType="int">
+        SELECT count(sex) from UseMessage where userid in (SELECT userid from Orderlist where storeid=#{id} and Orderlist.`status` in (1,2)) and sex=#{sex} and age BETWEEN #{low} and #{hight}
+    </select>
+</mapper>

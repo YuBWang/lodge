@@ -1,0 +1,33 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <title>点亮星星评分</title></head>
+<body  onload="test()">
+<table id ="czy">
+    <tr>
+        <td title="1分"><h1 >★</h1></td><td title="2分"><h1>★</h1></td><td title="3分"><h1>★</h1></td><td title="4分"><h1>★</h1></td><td title="5分"><h1>★</h1></td>
+    </tr>
+</table>
+<input type="button" id="ok" value="打分">
+<script>
+    var te = document.getElementById("czy").getElementsByTagName("td");
+    //tds=document.getElementsByTagName("td");
+    tds = te;
+    for(var i=0;i<tds.length;i++){
+        tds[i].onmouseover=test;
+    }    var index;
+    function  test(){
+
+        for(var i=0;i<tds.length;i++){
+            if(tds[i]==this)
+        {
+            index=i;
+        }
+        }        for(var i=0;i<=index;i++) {
+            tds[i].style.color = "red";
+        }        for(var i=index+1;i<tds.length;i++){
+            tds[i].style.color="black";
+        }
+    }
+    document.getElementById("ok").onclick=function(){
+        alert("评分："+(index+1)+"分");
+    }</script></body></html>

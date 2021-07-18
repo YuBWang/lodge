@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jmu.lodgesystem.dao.OrderlistMapper">
+    <insert id="insertOrder" parameterType="com.jmu.lodgesystem.entity.Orderlist">
+        insert into Orderlist(orderid,storeid,productid,userid,status) values (#{orderid},#{storeid},#{productid},#{userid},#{status})
+    </insert>
+    <select id="findByid" parameterType="String" resultType="com.jmu.lodgesystem.entity.Orders">
+        select Orderlist.orderid,Orderlist.storeid,Orderlist.productid,Orderlist.userid,ProMessage.types,ProMessage.startday,ProMessage.endday,ProMessage.allmoney,ProMessage.earmoney,Orderlist.`status` from Orderlist,ProMessage where Orderlist.productid=ProMessage.productid and Orderlist.storeid=#{id}
+    </select>
+    <select id="findByStatus" resultType="com.jmu.lodgesystem.entity.Orders">
+        select Orderlist.orderid,Orderlist.storeid,Orderlist.productid,Orderlist.userid,ProMessage.types,ProMessage.startday,ProMessage.endday,ProMessage.allmoney,ProMessage.earmoney,Orderlist.`status` from Orderlist,ProMessage where Orderlist.productid=ProMessage.productid and Orderlist.storeid=#{id} and Orderlist.`status`=#{s}
+    </select>
+
+    <select id="findByid2" parameterType="String" resultType="com.jmu.lodgesystem.entity.Orders">
+        select Orderlist.orderid,Orderlist.storeid,Orderlist.productid,Orderlist.userid,ProMessage.types,ProMessage.startday,ProMessage.endday,ProMessage.allmoney,ProMessage.earmoney,Orderlist.`status` from Orderlist,ProMessage where Orderlist.productid=ProMessage.productid and Orderlist.userid=#{id}
+    </select>
+    <select id="findByStatus2" resultType="com.jmu.lodgesystem.entity.Orders">
+        select Orderlist.orderid,Orderlist.storeid,Orderlist.productid,Orderlist.userid,ProMessage.types,ProMessage.startday,ProMessage.endday,ProMessage.allmoney,ProMessage.earmoney,Orderlist.`status` from Orderlist,ProMessage where Orderlist.productid=ProMessage.productid and Orderlist.userid=#{id} and Orderlist.`status`=#{s}
+    </select>
+    <select id="findBylistId" resultType="com.jmu.lodgesystem.entity.Orders" parameterType="String">
+        select Orderlist.orderid,Orderlist.storeid,Orderlist.productid,Orderlist.userid,ProMessage.types,ProMessage.startday,ProMessage.endday,ProMessage.allmoney,ProMessage.earmoney,Orderlist.`status` from Orderlist,ProMessage where Orderlist.productid=ProMessage.productid and Orderlist.orderid=#{id}
+    </select>
+    <update id="updateStatus">
+        update Orderlist set Orderlist.`status`=#{s} where Orderlist.orderid=#{id}
+    </update>
+
+</mapper>

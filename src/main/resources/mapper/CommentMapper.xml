@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jmu.lodgesystem.dao.CommentMapper">
+    <insert id="insertComment" parameterType="com.jmu.lodgesystem.entity.Comment">
+        insert into Comment(storeid,productid,userid,orderid,grade,message) values (#{storeid},#{productid},#{userid},#{orderid},#{grade},#{message})
+    </insert>
+    <select id="avgcount" parameterType="String" resultType="double">
+        select avg(grade) from Comment where storeid=#{id}
+    </select>
+    <select id="returnAllComment" parameterType="String" resultType="com.jmu.lodgesystem.entity.Comment">
+        select * from Comment where storeid=#{id}
+    </select>
+    <select id="commentCount" parameterType="String" resultType="int">
+        select count(*) from Comment where storeid=#{id}
+    </select>
+
+</mapper>

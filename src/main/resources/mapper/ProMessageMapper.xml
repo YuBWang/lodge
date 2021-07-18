@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jmu.lodgesystem.dao.ProMessageMapper">
+    <insert id="inserts" parameterType="com.jmu.lodgesystem.entity.ProMessage" >
+        insert into ProMessage(productid,storeid,types,startday,endday,allmoney,earmoney) values (#{productid},#{storeid},#{types},#{startday},#{endday},#{allmoney},#{earmoney})
+    </insert>
+
+    <select id="selectById" parameterType="String" resultType="com.jmu.lodgesystem.entity.ProMessage">
+        select * from ProMessage where storeid = #{storeid}
+    </select>
+
+    <delete id="deletById" parameterType="String">
+        delete from ProMessage where productid=#{id}
+    </delete>
+    <select id="findByProId" parameterType="String" resultType="com.jmu.lodgesystem.entity.ProMessage">
+        select * from ProMessage where productid=#{id}
+    </select>
+
+</mapper>

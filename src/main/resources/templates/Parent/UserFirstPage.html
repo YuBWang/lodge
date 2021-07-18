@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS -->
+    <!-- Bootstrap CSS
+    ============================================ -->
+    <link rel="stylesheet" type="text/css" href="../../static/souye/css/bootstrap.min.css">
+    <!-- Icon Font CSS
+    ============================================ -->
+    <link rel="stylesheet" type="text/css" href="../../static/souye/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="../../static/souye/css/font-awesome.min.css">
+    <!-- Plugins CSS
+    ============================================ -->
+    <link rel="stylesheet" type="text/css" href="../../static/souye/css/plugins.css">
+    <!-- Style CSS
+    ============================================ -->
+    <link rel="stylesheet" type="text/css" href="../../static/souye/css/style.css">
+    <!-- Modernizer JS
+    ============================================ -->
+    <script src="../../static/souye/js/vendor/modernizr-2.8.3.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../static/jiemian2/css/style.default.css">
+
+
+</head>
+
+<body>
+<!-- Body main wrapper start -->
+<div class="wrapper fix">
+
+    <!-- Header Area Start -->
+    <div id="header-area" class="header-area section">
+
+        <!-- Header Top Start -->
+        <div class="header-top">
+            <div class="container">
+                <div class="row">
+                    <div class="header-info text-left col-md-6">
+
+                    </div>
+                    <div class="header-social text-right col-md-6 hidden-xs">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header Top End -->
+
+        <!-- Header Bottom Start -->
+        <div class="header-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+
+                        <div class="navbar-header">
+                            <button class="menu-toggle navbar-toggle collapsed" data-toggle="collapse"
+                                    data-target="#main-menu">
+                                <i class="zmdi open zmdi-menu"></i>
+                                <i class="zmdi close zmdi-close"></i>
+                            </button>
+                            <!--                            <a class="navbar-brand logo" href="onepage.html"><img src="../static/souye/img/logo.png" alt=""></a>-->
+                        </div>
+
+                        <!---- Menu ---->
+                        <div id="main-menu" class="main-menu onepage-nav collapse navbar-collapse float-right">
+                            <nav>
+                                <ul>
+                                    <li ><a th:href="@{home}">首页</a></li>
+                                    <li><a th:href="@{MessageList}">消息<div class="badge badge-warning">[[${count}]] New</div></a></li>
+                                    <li><a href="Personordmanager">订单</a></li>
+                                    <li><a href="findChildMessage">动态</a></li>
+                                    <li><a href="userInfo">个人中心</a></li>
+
+
+                                </ul>
+                            </nav>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header Bottom End -->
+
+    </div>
+    <!-- Header Area End -->
+
+    <!-- Hero Area Start -->
+    <div id="hero-area" class="hero-area section">
+
+        <!-- Hero Slider Start -->
+        <div class="hero-slider">
+
+            <!-- Single Hero Item -->
+            <div class="hero-item overlay" data-thumb="../../static/souye/img/hero/3.jpg">
+                <img src="../../static/souye/img/hero/3.jpg" alt="">
+                <div class="container">
+                    <div class="row">
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- Single Hero Item -->
+            <div class="hero-item overlay" data-thumb="../../static/souye/img/hero/4.jpg">
+                <img src="../../static/souye/img/hero/4.jpg" alt="">
+                <div class="container">
+                    <div class="row">
+                        <div class="hero-content col-xs-12">
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!---- Hero Slider End ---->
+
+    </div>
+    <!-- Hero Area End -->
+
+
+
+    <div id="newsletter-area" class="newsletter-area section pb-120 pt-120">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="newsletter-section-title text-center col-xs-12 mb-45">
+                    <h2>输入目的地进行 <span>查找</span></h2>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-xs-12 text-center">
+
+                    <form action="parSearch" id="subscribe-form">
+                        <input type="text" name="searchplace" placeholder="" style="border: 0;outline: 0;width: 300px">
+                        <input type="submit" value="搜索地点附近机构">
+                    </form>
+
+                    <div class="social" th:if="${not#lists.isEmpty(list)}">
+                        <table style="margin-left: 200px">
+                            <tbody th:each="li:${list}" >
+                            <tr>
+                                <td >
+                                    <img th:src="${li.get(0)}"  style="width: 180px;height: 150px"/>
+
+                                </td>
+                                <td style="width: 250px" >
+                                    <p><h3>[[${li.get(1)}]]<br>[[${li.get(2)}]]</h3></p>
+
+                                </td>
+                                <td style="width: 150px;color: red">
+                                    <p><h4>[[${li.get(3)}]]</h4></p>
+
+                                </td>
+                                <td style="width: 150px" >
+                                    <p><h4>[[${li.get(4)}]]m</h4></p>
+                                </td>
+                                <td >
+                                    <a th:href="@{findStoreDetail(storid=${li.get(5)})}"><p style="width: 50px"><h4>查看详情</h4></p></a>
+                                </td>
+
+                            </tr>
+                            <tr style="height: 10px;background: #7EC4CC"></tr>
+
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+</div>
+<!-- JS -->
+
+<!-- jQuery JS
+============================================ -->
+<script src="../../static/souye/js/vendor/jquery-1.12.0.min.js"></script>
+<!-- Bootstrap JS
+============================================ -->
+<script src="../../static/souye/js/bootstrap.min.js"></script>
+<!-- Plugins JS
+============================================ -->
+<script src="../../static/souye/js/plugins.js"></script>
+<!-- Ajax Mail JS
+============================================ -->
+<script src="../../static/souye/js/ajax-mail.js"></script>
+<!-- Main JS
+============================================ -->
+<script src="../../static/souye/js/main.js"></script>
+
+
+</body>
+</html>

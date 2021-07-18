@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jmu.lodgesystem.dao.MealsMapper">
+   <insert id="inserts" parameterType="com.jmu.lodgesystem.entity.Meals">
+       insert into Meals(meaid,storeid,times,photolist) values (#{meaid},#{storeid},#{times},#{photolist})
+   </insert>
+    <select id="findById" parameterType="String" resultType="com.jmu.lodgesystem.entity.Meals">
+        select * from Meals where storeid=#{id} ORDER BY times ASC
+    </select>
+    <delete id="deleteById" parameterType="String">
+        delete from Meals where meaid=#{id}
+    </delete>
+    <select id="findNearThreeMeal" parameterType="String" resultType="com.jmu.lodgesystem.entity.Meals">
+        select * from Meals where storeid=#{id} ORDER BY times DESC limit 3
+    </select>
+</mapper>

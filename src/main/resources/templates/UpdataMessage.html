@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>商家注册</title>
+    <link rel="stylesheet" type="text/css" href="../static/souye/css/style.css">
+    <style type="text/css">
+        .storenam {
+            color: #5bc0de;
+            margin-top: 10px;
+
+        }
+
+        .storename2 {
+            width: 20%;
+            line-height: 25px;
+        }
+
+        .storeaddress {
+
+            color: #5bc0de;
+            margin-top: 45px;
+        }
+
+
+        .licence {
+
+            color: #5bc0de;
+            margin-top: 45px;
+        }
+
+        .licence2 {
+            margin-top: 50px;
+            color: #5bc0de;
+        }
+
+        .cardphoto {
+            width: 100%;
+            height: 90px;
+            margin-top: 60px;
+            color: #5bc0de;
+        }
+
+        .cardphoto3 {
+            left: 70%;
+            margin-bottom: 15%;
+        }
+
+        .cardphotobutton {
+            width: 20%;
+            line-height: 25px;
+            color: #5bc0de;
+            margin-bottom: 30%;
+        }
+
+        .cardphoto3 {
+            left: 70%;
+        }
+
+        .butt {
+            height: 200px;
+            width: 100%;
+        }
+
+    </style>
+
+</head>
+<body>
+<div style="width: 100%;text-align: center">
+    <form action="MessageUpload" method="post" enctype="multipart/form-data">
+        <div class="storenam">
+            <label class="">店铺名称</label>
+            <input type="text" class="storename2" name="storename"/>
+        </div>
+        <div class="storeaddress">
+            <label class="">注册地址</label>
+            <input type="text" class="storename2" name="address"/>
+        </div>
+        <div class="licence">
+            <label class="">执照注册号</label>
+            <input type="text" class="storename2" name="licenseid"/>
+        </div>
+        <div class="licence2">
+            <textarea cols="50" rows="10">在这里输入简介</textarea>
+        </div>
+        <div class="cardphoto">
+            <label style="position: absolute;left: 5%;">身份证正面</label>
+            <input onchange="previewImage(this, 'prvid')" type="file" name="fidcard" id="fidcard"
+                   style="position: absolute;left: 12%;" value="身份证正面"/>
+            <label style="position: absolute;left: 33%;">身份证反面</label>
+            <input onchange="previewImage(this, 'prvid1')" type="file" name="ridcard" id="ridcard"
+                   style="position: absolute;left: 40%;" value="身份证反面"/>
+            <label style="position: absolute;left: 63%;">营业执照</label>
+            <input onchange="previewImage(this, 'prvid2')" type="file" name="licensephoto" id="licensephoto"
+                   style="position: absolute;left: 70%;" value="营业执照"/>
+
+        </div>
+        <div class="butt">
+            <!--第一张图片-->
+            <div id="prvid" style="position: absolute;left: 10%;"></div>
+            <!--第二张图片-->
+            <div id="prvid1" style="position: absolute;left: 40%;"></div>
+            <!--       第三张图片-->
+            <div id="prvid2" style="position: absolute;left: 70%;"></div>
+
+        </div>
+        <div>
+            <input type="submit" class="cardphotobutton" value="确定提交">
+        </div>
+
+    </form>
+</div>
+</body>
+<style type="text/css">
+    .photoStyle {
+        height: 150px;
+        width: 200px;
+    }
+</style>
+<script type="text/javascript">
+    function previewImage(file, prvid) {
+        /* file：file控件
+         * prvid: 图片预览容器
+         */
+        var tip = "Expect jpg or png or gif!"; // 设定提示信息
+        var filters = {
+            "jpeg": "/9j/4",
+            "gif": "R0lGOD",
+            "png": "iVBORw"
+        }
+        var prvbox = document.getElementById(prvid);
+        prvbox.innerHTML = "";
+        if (window.FileReader) { // html5方案
+            for (var i = 0, f; f = file.files[i]; i++) {
+                var fr = new FileReader();
+                fr.onload = function (e) {
+                    var src = e.target.result;
+                    if (!validateImg(src)) {
+                        alert(tip)
+                    } else {
+                        showPrvImg(src);
+                    }
+                }
+                fr.readAsDataURL(f);
+            }
+        } else { // 降级处理
+
+            if (!/\.jpg$|\.png$|\.gif$/i.test(file.value)) {
+                alert(tip);
+            } else {
+                showPrvImg(file.value);
+            }
+        }
+
+        function validateImg(data) {
+            var pos = data.indexOf(",") + 1;
+            for (var e in filters) {
+                if (data.indexOf(filters[e]) === pos) {
+                    return e;
+                }
+            }
+            return null;
+        }
+
+        function showPrvImg(src) {
+            var img = document.createElement("img");
+            img.src = src;
+            img.className = "photoStyle";
+            prvbox.appendChild(img);
+        }
+    }
+</script>
+
+</html>

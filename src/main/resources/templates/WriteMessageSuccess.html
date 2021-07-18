@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+    <title>信息填写成功</title>
+</head>
+<body>
+<p>填写成功!等待管理员审核 还有<span id="sp">5</span>秒跳转到登录界面...</p>
+<script>
+    onload = function () {
+        setInterval(go, 1000)
+    };
+    var x = 4;
+
+    function go() {
+
+        if (x >= 0) {
+            document.getElementById("sp").innerText = x;
+        } else {
+            location.href = "loginpage";
+        }
+        x--;
+    }
+</script>
+</body>
+</html>

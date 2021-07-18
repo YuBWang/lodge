@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS -->
+    <!-- Bootstrap CSS
+    ============================================ -->
+    <link rel="stylesheet" type="text/css" href="../../static/souye/css/bootstrap.min.css">
+    <!-- Icon Font CSS
+    ============================================ -->
+    <link rel="stylesheet" type="text/css" href="../../static/souye/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="../../static/souye/css/font-awesome.min.css">
+    <!-- Plugins CSS
+    ============================================ -->
+    <link rel="stylesheet" type="text/css" href="../../static/souye/css/plugins.css">
+    <!-- Style CSS
+    ============================================ -->
+    <link rel="stylesheet" type="text/css" href="../../static/souye/css/style.css">
+    <!-- Modernizer JS
+    ============================================ -->
+    <script src="../../static/souye/js/vendor/modernizr-2.8.3.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../static/jiemian2/css/style.default.css">
+
+
+</head>
+
+<body>
+<!-- Body main wrapper start -->
+<div class="wrapper fix">
+
+    <!-- Header Area Start -->
+    <div id="header-area" class="header-area section">
+
+        <!-- Header Top Start -->
+        <div class="header-top">
+            <div class="container">
+                <div class="row">
+                    <div class="header-info text-left col-md-6">
+
+                    </div>
+                    <div class="header-social text-right col-md-6 hidden-xs">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header Top End -->
+
+        <!-- Header Bottom Start -->
+        <div class="header-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+
+                        <div class="navbar-header">
+                            <button class="menu-toggle navbar-toggle collapsed" data-toggle="collapse"
+                                    data-target="#main-menu">
+                                <i class="zmdi open zmdi-menu"></i>
+                                <i class="zmdi close zmdi-close"></i>
+                            </button>
+                            <!--                            <a class="navbar-brand logo" href="onepage.html"><img src="../static/souye/img/logo.png" alt=""></a>-->
+                        </div>
+
+                        <!---- Menu ---->
+                        <div id="main-menu" class="main-menu onepage-nav collapse navbar-collapse float-right">
+                            <nav>
+                                <ul>
+                                    <li ><a href="#hero-area">首页</a></li>
+                                    <li><a href="">消息<div class="badge badge-warning">[[${count}]] New</div></a></li>
+                                    <li><a href="Personordmanager">订单</a></li>
+                                    <li><a href="findChildMessage">动态</a></li>
+                                    <li><a href="userInfo">个人中心</a></li>
+
+
+                                </ul>
+                            </nav>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header Bottom End -->
+
+    </div>
+    <!-- Header Area End -->
+    <div class="margin clearfix">
+        <div class="Shops_Audit">
+            <div class="bk-con-message message-section" id="iframe_box">
+                <!--列表内容-->
+                <div style="height: 150px">
+
+                    <form name="form" id="form" action="multipleImageUpload" method="post" enctype="multipart/form-data" style="text-align: right">
+                        <input type="file" style="color: #5bc0de;margin-left: 30px" name="fileName" id="filename" accept="image/png, image/jpeg, image/jpg" multiple="multiple" onchange="checkImage(this)">
+                        <input type="button" style="color: #5bc0de;text-align: right" id="submitBtn" onclick="checkSubmit()" value="上传"/>
+                    </form>
+
+                    <div id="onLoadImage" style="margin-left: 100px">
+
+                    </div>
+                </div>
+
+                <!--申请列表-->
+                <div class="audit_list">
+                    <table class="table table-striped table-bordered table-hover" id="sample-table">
+                        <thead>
+                        <tr>
+                            <th style="text-align: center">时间</th>
+                            <th style="width: 200px"></th>
+                            <th style="width: 200px"></th>
+                            <th style="width: 200px;text-align: center">三餐</th>
+                            <th style="width: 200px"></th>
+                            <th style="width: 200px"></th>
+                        </tr>
+                        </thead>
+                        <div th:if="${not#lists.isEmpty(photoList)}">
+                            <tbody th:each="li:${photoList}" >
+                            <tr style="height: 80px" >
+                                <td th:text="${li.get(2)}" style="text-align: center;font-size: 12px"></td>
+
+                                <td >
+                                    <img th:src="${li.get(3)}" style="height: 80px;width: 150px;text-align: center" onerror="this.src='../../static/jiemian3/images/image.png',this.onerror=null"/>
+                                </td>
+                                <td >
+                                    <img th:src="${li.get(4)}" style="height: 80px;width: 150px;text-align: center"onerror="this.src='../../static/jiemian3/images/image.png',this.onerror=null"/>
+                                </td>
+                                <td >
+                                    <img th:src="${li.get(5)}" style="height: 80px;width: 150px;text-align: center"onerror="this.src='../../static/jiemian3/images/image.png',this.onerror=null"/>
+                                </td>
+                                <td >
+                                    <img th:src="${li.get(6)}"style="height: 80px;width: 150px;text-align: center"onerror="this.src='../../static/jiemian3/images/image.png',this.onerror=null"/>
+                                </td>
+                                <td >
+                                    <img th:src="${li.get(7)}"style="height: 80px;width: 150px;text-align: center"onerror="this.src='../../static/jiemian3/images/image.png',this.onerror=null"/>
+                                </td>
+
+                            </tr>
+                            </tbody>
+                        </div>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</div>
+<!-- JS -->
+
+<!-- jQuery JS
+============================================ -->
+<script src="../../static/souye/js/vendor/jquery-1.12.0.min.js"></script>
+<!-- Bootstrap JS
+============================================ -->
+<script src="../../static/souye/js/bootstrap.min.js"></script>
+<!-- Plugins JS
+============================================ -->
+<script src="../../static/souye/js/plugins.js"></script>
+<!-- Ajax Mail JS
+============================================ -->
+<script src="../../static/souye/js/ajax-mail.js"></script>
+<!-- Main JS
+============================================ -->
+<script src="../../static/souye/js/main.js"></script>
+
+
+</body>
+</html>
+<script>
+    $(function () {
+        $(".displayPart").displayPart();
+    });
+    $(function() {
+        var oTable1 = $('#sample-table').dataTable( {
+            //"aaSorting": [],//默认第几个排序
+            "bStateSave": true,//状态保存
+            //"dom": 't',
+            "bFilter":false,
+            "aoColumnDefs": [
+                //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+                {"orderable":false,"aTargets":[0,1,2,3,4,5,6]}// 制定列不参与排序
+            ] } );
+        $('table th input:checkbox').on('click' , function(){
+            var that = this;
+            $(this).closest('table').find('tr > td:first-child input:checkbox')
+                .each(function(){
+                    this.checked = that.checked;
+                    $(this).closest('tr').toggleClass('selected');
+                });
+
+        });
+    })
+    /*店铺-删除*/
+    function member_del(obj,id){
+        layer.confirm('确认要删除吗？',{icon:0,},function(index){
+            $(obj).parents("tr").remove();
+            layer.msg('已删除!',{icon:1,time:1000});
+        });
+    }
+    //面包屑返回值
+    var index = parent.layer.getFrameIndex(window.name);
+    parent.layer.iframeAuto(index);
+    $('.Refund_detailed').on('click', function(){
+        var cname = $(this).attr("title");
+        var chref = $(this).attr("href");
+        var cnames = parent.$('.Current_page').html();
+        var herf = parent.$("#iframe").attr("src");
+        parent.$('#parentIframe').html(cname);
+        parent.$('#iframe').attr("src",chref).ready();;
+        parent.$('#parentIframe').css("display","inline-block");
+        parent.$('.Current_page').attr({"name":herf,"href":"javascript:void(0)"}).css({"color":"#4c8fbd","cursor":"pointer"});
+        parent.layer.close(index);
+
+    });
+</script>

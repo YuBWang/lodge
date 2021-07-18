@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jmu.lodgesystem.dao.MessageMapper">
+    <insert id="insertMessage" parameterType="com.jmu.lodgesystem.entity.Message" >
+        insert into Message(senderid,receiveid,messages,indent,status) values (#{senderid},#{receiveid},#{messages},#{indent},#{status})
+    </insert>
+    <delete id="deleteById">
+        delete from Message where indent=#{id}
+    </delete>
+    <select id="findAll" resultType="com.jmu.lodgesystem.entity.Message">
+       select * from Message where senderid=#{fr} and receiveid=#{to} and indent=#{id} or senderid=#{to} and receiveid=#{fr} and indent=#{id} order by times ASC
+    </select>
+    <select id="findUnreadCount" resultType="int">
+        select count(*) from Message where receiveid=#{id} and status=0
+    </select>
+    <select id="findallname" parameterType="String" resultType="String">
+        select DISTINCT senderid from Message where receiveid=#{id} and status=0
+    </select>
+    <select id="findAllUnreadMessage" parameterType="String" resultType="com.jmu.lodgesystem.entity.Message">
+        select * from Message where senderid=#{fr} and receiveid=#{to} and indent=#{to} order by times DESC LIMIT 1
+    </select>
+    <select id="findHadREadName" parameterType="String" resultType="String" >
+        select DISTINCT senderid  from Message  where receiveid=#{id}  and indent=#{id} and senderid NOT IN (select DISTINCT senderid as i from Message where receiveid=#{id} and status=0 and indent=#{id})
+    </select>
+    <update id="upReadMessage" parameterType="String">
+        update Message set status=1 where senderid=#{fr} and receiveid=#{to} and indent=#{to}
+    </update>
+    <delete id="deleteMessage" parameterType="String">
+        delete from Message where senderid=#{fr} and receiveid=#{to} and indent=#{id}
+    </delete>
+</mapper>

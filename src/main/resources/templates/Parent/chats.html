@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS -->
+    <!-- Bootstrap CSS
+    ============================================ -->
+    <link rel="stylesheet" type="text/css" href="../../static/souye/css/bootstrap.min.css">
+    <!-- Icon Font CSS
+    ============================================ -->
+    <link rel="stylesheet" type="text/css" href="../../static/souye/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="../../static/souye/css/font-awesome.min.css">
+    <!-- Plugins CSS
+    ============================================ -->
+    <link rel="stylesheet" type="text/css" href="../../static/souye/css/plugins.css">
+    <!-- Style CSS
+    ============================================ -->
+    <link rel="stylesheet" type="text/css" href="../../static/souye/css/style.css">
+    <!-- Modernizer JS
+    ============================================ -->
+    <script src="../../static/souye/js/vendor/modernizr-2.8.3.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../static/jiemian2/css/style.default.css">
+
+    <link rel="stylesheet" th:href="@{/webjars/mdui/dist/css/mdui.css}">
+    <script src="../static/login/js/jquery.min.js"></script>
+    <script th:src="@{/webjars/mdui/dist/js/mdui.js}"></script>
+    <style type="text/css">
+        #div{
+            width: 100%;
+            height: 500px;
+            overflow-x: hidden;
+            overflow-y: scroll;
+
+        }
+        #div::-webkit-scrollbar{
+            display: none;
+        }
+
+    </style>
+
+
+</head>
+
+<body class="mdui-theme-primary-indigo mdui-theme-accent-pink">
+
+<!-- Header Bottom Start -->
+<div class="header-bottom">
+
+    <!---- Menu ---->
+    <div id="main-menu" class="main-menu onepage-nav collapse navbar-collapse float-right">
+        <nav>
+            <ul>
+                <li ><a th:href="@{home}">首页</a></li>
+                <li><a th:href="@{MessageList}">消息<div class="badge badge-warning">[[${count}]] New</div></a></li>
+                <li><a href="Personordmanager">订单</a></li>
+                <li><a href="findChildMessage">动态</a></li>
+                <li><a href="userInfo">个人中心</a></li>
+
+
+            </ul>
+        </nav>
+    </div>
+
+    <div>
+        <div class="mdui-container container_text">
+
+            <div class="mdui-row">
+                <div class="mdui-col-xs-12 mdui-col-sm-6">
+                    <div class="mdui-col-xs-12 mdui-col-sm-10">
+                        <div class="mdui-textfield-floating-label" style="margin-top:15px">
+                            <i class="mdui-icon material-icons"></i>
+                            <input type="text" th:value="${inuse}" hidden="hidden"  id="username" />
+                            <input type="text" id="touser" hidden="hidden" th:value="${outuse}">
+                        </div>
+                    </div>
+                    <div class="mdui-col-xs-12 mdui-col-sm-10">
+                        <div class="mdui-textfield mdui-textfield-floating-label">
+                            <i class="mdui-icon material-icons">textsms</i>
+                            <label class="mdui-textfield-label">发送内容</label>
+                            <input class="mdui-textfield-input" id="msg"/>
+                        </div>
+                        <div class="mdui-container" style="padding:20px 35px">
+                            <button class="mdui-btn mdui-color-theme-accent mdui-ripple"
+                                    onclick="send()">发送 (enter)
+                            </button>
+                            <button class="mdui-btn mdui-color-theme mdui-ripple"
+                                    onclick="clearMsg()">清屏
+                            </button>
+
+                        </div>
+                    </div>
+                    <div style="margin-top: 50px; color: #00be67"> <p ><h6>若无法发送消息，请刷新界面</h6></p></div>
+
+                </div>
+
+                <div class="mdui-col-xs-6 mdui-col-sm-5" style="padding:10px 0">
+                    <div class="mdui-chip">
+                    <span class="mdui-chip-icon mdui-color-blue">
+                        <i class="mdui-icon material-icons">&#xe420;</i></span>
+                        <span class="mdui-chip-title">聊天内容</span>
+                    </div>
+
+                    <div class="mdui-chip">
+                    <span class="mdui-chip-icon mdui-color-blue">
+                        <i class="mdui-icon material-icons">face</i></span>
+                        <span class="mdui-chip-title"></span>
+                        <span class="mdui-chip-title chat-num" >[[${storeName}]]</span>
+                    </div>
+                    <div class="message-container" id="div" th:if="${not#lists.isEmpty(list)}" >
+                        <div th:each="li:${list}">
+                            <div class="mdui-card" style="margin: 3px 0;" >
+                                <div class="mdui-card-content message-content"><h6>[[${li.getTimes()}]]</h6>[[${li.getSenderid()}]]: [[${li.getMessages()}]]  </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+<!-- JS -->
+
+<!-- jQuery JS
+============================================ -->
+<script src="../../static/souye/js/vendor/jquery-1.12.0.min.js"></script>
+<!-- Bootstrap JS
+============================================ -->
+<script src="../../static/souye/js/bootstrap.min.js"></script>
+<!-- Plugins JS
+============================================ -->
+<script src="../../static/souye/js/plugins.js"></script>
+<!-- Ajax Mail JS
+============================================ -->
+<script src="../../static/souye/js/ajax-mail.js"></script>
+<!-- Main JS
+============================================ -->
+<script src="../../static/souye/js/main.js"></script>
+
+
+</body>
+</html>
+<script th:inline="javascript">
+
+    /**
+     * WebSocket客户端
+     *
+     * 使用说明：
+     * 1、WebSocket客户端通过回调函数来接收服务端消息。例如：webSocket.onmessage
+     * 2、WebSocket客户端通过send方法来发送消息给服务端。例如：webSocket.send();
+     */
+    function getWebSocket() {
+        /**
+         * WebSocket客户端 PS：URL开头表示WebSocket协议 中间是域名端口 结尾是服务端映射地址
+         */
+            // var webSocket = new WebSocket(/*[[${webSocketUrl}]]*/ 'ws://localhost:8080/chat');
+        var webSocket = new WebSocket("ws://localhost:8080/websocket/"+document.getElementById('username').value);
+        /**
+         * 当服务端打开连接
+         */
+        webSocket.onopen = function (event) {
+            console.log('WebSocket打开连接');
+        };
+
+        /**
+         * 当服务端发来消息：1.广播消息 2.更新在线人数
+         */
+        webSocket.onmessage = function (event) {
+
+            var received_msg = event.data;
+            var obj = JSON.parse(received_msg);
+            var touser = obj.tousername;
+            var frname = obj.fromusername;
+            var $messageContainer = $('.message-container');
+            var judge1 = document.getElementById("username").value;
+            var judge2 = document.getElementById("touser").value;
+            if(frname==judge1&&touser==judge2||frname==judge2&&touser==judge1) {
+                if(frname==judge1){
+                    frname="我";
+                }
+                $messageContainer.append(
+                    '<div class="mdui-card" style="margin: 3px 0;">' +
+
+                    '<div class="mdui-card-content message-content" >' + frname + " :   " + obj.textMessage + '</div>' +
+                    '</div>');
+
+            }
+
+
+        };
+
+        /**
+         * 关闭连接
+         */
+        webSocket.onclose = function (event) {
+            console.log('WebSocket关闭连接');
+        };
+
+        /**
+         * 通信失败
+         */
+        webSocket.onerror = function (event) {
+            console.log('WebSocket发生异常');
+
+        };
+        return webSocket;
+    }
+
+    var webSocket = getWebSocket();
+
+
+    /**
+     * 通过WebSocket对象发送消息给服务端
+     */
+    function sendMsgToServer() {
+        var $message = $('#msg');
+        if ($message.val()) {
+            webSocket.send(JSON.stringify({username: $('#username').text(), msg: $message.val()}));
+            $message.val(null);
+        }
+
+    }
+    function send() {
+        var message = {
+            "message": document.getElementById('msg').value,
+            "username": document.getElementById('username').value,
+            "to": document.getElementById('touser').value,
+        };
+        webSocket.send(JSON.stringify(message));
+        $("#msg").val("");
+
+    }
+
+    /**
+     * 清屏
+     */
+    function clearMsg() {
+        $(".message-container").empty();
+    }
+
+    /**
+     * 使用ENTER发送消息
+     */
+    document.onkeydown = function (event) {
+        var e = event || window.event || arguments.callee.caller.arguments[0];
+        e.keyCode === 13 && sendMsgToServer();
+    };
+
+
+</script>
+

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <link href="../static/jiemian1/css/SYSFrame.css" rel="stylesheet" type="text/css" />
+    <link href="../static/jiemian1/font/iconfont.css" rel="stylesheet" type="text/css" />
+    <link href="../static/jiemian1/css/module.css" rel="stylesheet" type="text/css" />
+    <link href="../static/jiemian1/css/pages.css" rel="stylesheet" type="text/css" />
+    <title>个人信息</title>
+    <script src="../static/jiemian1/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="../static/jiemian1/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="../static/jiemian1/js/HUpages.js" type="text/javascript"></script>
+    <script src="../static/jiemian1/js/common.js" type="text/javascript"></script>
+    <script src="../static/jiemian1/js/template.js" type="text/javascript"></script>
+    <!--[if lt IE 9]>
+    <script src="../static/jiemian1/js/html5shiv.js" type="text/javascript"></script>
+    <script src="../static/jiemian1/js/css3-mediaqueries.js" type="text/javascript"></script>
+    <![endif]-->
+</head>
+<body id="pagestyle" class="backgrounddd">
+<div class="bk-con-message message-section" id="iframe_box">
+    <div class="box-module height100b margin0">
+        <div class="box-title">店铺注册</div>
+
+        <div class="box-content padding15">
+            <div class="Promp_plate btn-green ">
+
+            </div>
+            <!--个人信息-->
+            <form action="MessageUpload" method="post" enctype="multipart/form-data">
+                <input id="account" type="hidden" name="account" th:value="${account}">
+            <div class="add_content clearfix mt15" >
+                <div class="clearfix" id="user_details"></div>
+                <ul class="info_list" id="VerifyTips1">
+
+                    <li class=" clearfix content_look mb15">
+                        <label class="label_name"><em style="color:Red;">*</em>店铺名称：</label>
+                        <span class="info_data"><input data-name="用户名" type="text" value="" name="storename" class="text_input col-sm-4" data-verify="verify"/></span>
+                    </li>
+                    <li class=" clearfix content_look mb15">
+                        <label class="label_name"><em style="color:Red;">*</em>执照注册号：</label>
+                        <span class="info_data"><input data-name="执照注册号" type="text" value="" name="licenseid" class="text_input col-sm-4" data-verify="verify"/></span>
+                    </li>
+                    <li class=" clearfix content_look mb15">
+                        <label class="label_name"><em style="color:Red;">*</em>地址：</label>
+                        <span class="info_data"><input data-name="地址" type="text" value="" name="address" class="text_input col-sm-4" data-verify="verify"/></span>
+                    </li>
+                    <li class=" clearfix content_look mb15">
+                        <label class="label_name"><em style="color:Red;">*</em>移动电话：</label>
+                        <span class="info_data"><input data-name="移动电话" type="text" value="" name="mobilephone" class="text_input col-sm-4" data-verify="verify"/></span>
+                    </li>
+                    <li class=" clearfix content_look mb15">
+                        <label class="label_name"><em style="color:Red;">*</em>固定电话：</label>
+                        <span class="info_data"><input data-name="固定电话" type="text" value="" name="fixedphone" class="text_input col-sm-4" data-verify="verify"/></span>
+                    </li>
+                    <li class=" clearfix content_look mb15">
+                        <label class="label_name"><em style="color:Red;">*</em>邮箱：</label>
+                        <span class="info_data"><input data-name="邮箱" type="text" value="" name="email" class="text_input col-sm-4" data-verify="verify"/></span>
+                    </li>
+                    <li class="clearfix content_look mb15">
+                        <label class="label_name"><em style="color:Red;">*</em>身份证正面：</label>
+                        <span class="info_data">
+									<div class="gradeimg-style">
+									<div class="Upload-screenshot">
+									<img class="addImg" id="addimg1" src="" onerror="this.src='../static/jiemian1/images/zjbg_03.png',this.onerror=null">
+									<input name="fidcard" id="fidcard" type="file" class="upload_input" onchange="previewImage(this, 'addimg1')">
+									<input type="hidden" id="img1" name="img1">
+									<div class="preBlock">
+										<img class="preview" alt="" name="pic" onerror="this.src='../static/jiemian1/images/zjbg_03.png',this.onerror=null">
+									</div>
+									<img class="delete" src="../static/jiemian1/images/delete.png">
+								</div>
+							    </div>
+								</span>
+                    </li>
+
+                    <li class="clearfix content_look mb15">
+                        <label class="label_name"><em style="color:Red;">*</em>身份证反面：</label>
+                        <span class="info_data">
+									<div class="gradeimg-style">
+									<div class="Upload-screenshot">
+									<img class="addImg" id="addimg2" src="" onerror="this.src='../static/jiemian1/images/zjbg_03.png',this.onerror=null">
+									<input name="ridcard" id="ridcard" type="file" class="upload_input" onchange="previewImage(this, 'addimg2')">
+									<input type="hidden" id="img2" name="img2">
+									<div class="preBlock">
+										<img class="preview" alt="" name="pic" onerror="this.src='../static/jiemian1/images/zjbg_03.png',this.onerror=null">
+									</div>
+									<img class="delete" src="../static/jiemian1/images/delete.png">
+								</div>
+							    </div>
+								</span>
+                    </li>
+
+                    <li class="clearfix content_look mb15">
+                        <label class="label_name"><em style="color:Red;">*</em>营业执照：</label>
+                        <span class="info_data">
+									<div class="gradeimg-style">
+									<div class="Upload-screenshot">
+									<img class="addImg" id="addimg3" src="" onerror="this.src='../static/jiemian1/images/zjbg_03.png',this.onerror=null">
+									<input name="licensephoto" id="licensephoto" type="file" class="upload_input" onchange="previewImage(this, 'addimg3')">
+									<input type="hidden" id="img3" name="img3">
+									<div class="preBlock">
+										<img class="preview" alt="" name="pic" onerror="this.src='../static/jiemian1/images/zjbg_03.png',this.onerror=null">
+									</div>
+									<img class="delete" src="../static/jiemian1/images/delete.png">
+								</div>
+							    </div>
+								</span>
+                    </li>
+
+                    <li class=" clearfix content_look mb15">
+                        <label class="label_name">简介：</label>
+                        <span class="info_data"><textarea data-name="说明" name="describe" class="form-textarea textarea-info" id="describe" placeholder=""></textarea>
+			        			</span>
+                    </li>
+                </ul>
+                <div id="prvid" style="position: absolute;left: 10%;"></div>
+                <div class="buttonstyle"><button type="submit"  class="btn padding10 bg-deep-blue" >提交</button></div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    $(function() {
+        $("#pagestyle").Hupage({
+            scrollbar: function(e) {
+                e.niceScroll({
+                    cursorcolor: "#dddddd",
+                    cursoropacitymax: 1,
+                    touchbehavior: false,
+                    cursorwidth: "3px",
+                    cursorborder: "0",
+                    cursorborderradius: "3px",
+                });
+            },
+            expand: function(thisBox, settings) {
+                settings.scrollbar(
+                    $(".box-content").css({
+                        height: $(window).height() - $('.box-title').outerHeight() - (settings.padding*2)
+                    })); //设置当前页滚动样式
+            }
+        })
+    });
+    (function($) {
+        $.getUrlParam = function(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if(r != null) return unescape(r[2]);
+            return null;
+        }
+    })(jQuery); //设置url
+    var userid = $.getUrlParam('userid');
+    //编辑数据
+    var userinfo = function(callback) {
+        $.ajax({
+            url: "json/userData.json",
+            type: "GET",
+            dataType: 'json',
+            success: function(ret) {
+                typeof callback == 'function' && callback(ret);
+            },
+        });
+    };
+    userinfo(function(listArr) {
+        var listhtml = $('#user_details');
+        var html = template('userinfoHtml', {
+            id: userid,
+            grade: listArr.grade,
+            list: listArr.administrator
+        });
+        listhtml.html(html);
+        $("#userinfoHtml").remove();
+        var api="";//调用的api接口
+        var type=1;//类型
+        //调用图片上传
+        imgUpload(api,type);
+        //设置字数
+        new Wordcount("form_textarea",200);
+    });
+    //提交操作
+
+    function modifybtn(){
+
+        new huprompt("VerifyTips");
+
+    }
+</script>
+<script type="text/javascript">
+    function previewImage(file, prvid) {
+        /* file：file控件
+         * prvid: 图片预览容器
+         */
+        var tip = "Expect jpg or png or gif!"; // 设定提示信息
+        var filters = {
+            "jpeg": "/9j/4",
+            "gif": "R0lGOD",
+            "png": "iVBORw"
+        }
+        var prvbox = document.getElementById(prvid);
+        prvbox.innerHTML = "";
+        if (window.FileReader) { // html5方案
+            for (var i = 0, f; f = file.files[i]; i++) {
+                var fr = new FileReader();
+                fr.onload = function (e) {
+                    var src = e.target.result;
+                    if (!validateImg(src)) {
+                        alert(tip)
+                    } else {
+                        showPrvImg(src);
+                    }
+                }
+                fr.readAsDataURL(f);
+            }
+        } else { // 降级处理
+
+            if (!/\.jpg$|\.png$|\.gif$/i.test(file.value)) {
+                alert(tip);
+            } else {
+                showPrvImg(file.value);
+            }
+        }
+
+        function validateImg(data) {
+            var pos = data.indexOf(",") + 1;
+            for (var e in filters) {
+                if (data.indexOf(filters[e]) === pos) {
+                    return e;
+                }
+            }
+            return null;
+        }
+
+        function showPrvImg(src) {
+            prvbox.src = src;
+
+        }
+    }
+</script>
+

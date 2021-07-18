@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+
+<head>
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <link href="../../static/jiemian1/css/SYSFrame.css" rel="stylesheet" type="text/css" />
+    <link href="../../static/jiemian1/font/iconfont.css" rel="stylesheet" type="text/css" />
+    <link href="../../static/jiemian1/css/module.css" rel="stylesheet" type="text/css" />
+    <link href="../../static/jiemian1/css/pages.css" rel="stylesheet" type="text/css" />
+    <script src="../../static/jiemian1/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="../../static/jiemian1/js/jquery.cookie.js" type="text/javascript"></script>
+    <script src="../../static/jiemian1/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="../../static/jiemian1/js/HUpages.js" type="text/javascript"></script>
+    <!--[if lt IE 9]>
+    <script src="../../static/jiemian1/js/html5shiv.js" type="text/javascript"></script>
+    <script src="../../static/jiemian1/js/css3-mediaqueries.js"  type="text/javascript"></script>
+    <![endif]-->
+
+    <!--    页面三-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link href="../../static/jiemian3/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../static/jiemian3/css/style.css"/>
+    <link href="../../static/jiemian3/assets/css/codemirror.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../static/jiemian3/assets/css/ace.min.css" />
+    <link rel="stylesheet" href="../../static/jiemian3/font/css/font-awesome.min.css" />
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="../../static/jiemian3/assets/css/ace-ie.min.css"/>
+    <![endif]-->
+    <script src="../../static/jiemian3/js/jquery-1.9.1.min.js"></script>
+    <script src="../../static/jiemian3/assets/js/bootstrap.min.js"></script>
+    <script src="../../static/jiemian3/assets/js/typeahead-bs2.min.js"></script>
+    <script src="../../static/jiemian3/assets/layer/layer.js" type="text/javascript" ></script>
+    <script src="../../static/jiemian3/assets/laydate/laydate.js" type="text/javascript"></script>
+    <!--   地图-->
+    <script src="http://api.map.baidu.com/api?v=1.4" type="text/javascript"></script>
+</head>
+<style type="text/css">
+    #div{
+        width: 100%;
+        height: 500px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+
+    }
+    #div::-webkit-scrollbar{
+        display: none;
+    }
+    #body1{
+        background: url("../static/1.jpg")repeat;
+        background-size: 100% 100%;
+
+    }
+</style>
+
+<body id="situation" class="backgrounddd" onload="judge()">
+
+<div class="clearfix" id="div">
+
+    <div class="">
+        <div class="box-module">
+            <div class="box-title" style="background: #a6e1ec">状态栏</div>
+            <div class="">
+                <div class="Shops_info clearfix">
+
+                    <div class="margin clearfix">
+                        <div class="detailed_style clearfix" style="background: white">
+                            <!--            <em class="type"></em>-->
+                            <div class="shop_logo"><img th:src="${list.getStorephoto()}" style="width: 200px;height: 150px"/></div>
+                            <ul class="shop_content clearfix">
+                                <li class="shop_name"></label><span class="info" style="color: #2e6da4"><h3>[[${list.getStorename()}]]</h3></span>
+                                    <div class="Authenticate"><i class="icon-yxrz"></i><i class="icon-yhk"></i><i class="icon-sjrz"></i><i class="icon-grxx"></i></div></li><br/>
+                                <li><label class="label_name">移动电话：</label><span class="info"><h5>[[${list.getMobilephone()}]]</h5></span></li>
+                                <li><label class="label_name">电子邮箱：</label><span class="info"><h5>[[${list.getEmail()}]]</h5></span></li>
+                                <li><label class="label_name">固定电话：</label><span class="info"><h5>[[${list.getFixedphone()}]]</h5></span></li>
+                                <li><label class="label_name">地址：</label><span ><h5>[[${list.getAddress()}]]</h5></span></li><br/>
+                                <li><label class="label_name">店铺评分：</label><span class="info" style="color: #1d7eb8"><h4>[[${list.getGrade()}]]</h4></span></li>
+                                <li><label class="label_name">点评人数：</label><span class="info" style="color: #2E6EBA"><h4>[[${people}]]</h4></span></li>
+
+                            </ul>
+                        </div>
+                        <div class="Store_Introduction">
+                            <div class="title_name" style="background: #9fcdff;color: white">机构介绍</div>
+                            <div class="info">
+                                [[${list.getDescribes()}]]
+
+                            </div>
+
+                        </div>
+                        <div class="Store_Introduction">
+                            <div class="title_name" style="background: #9fcdff;color: white">其他信息</div>
+                            <div class="info">
+                                <input type="hidden" id="cityName" th:value="${list.getAddress()}"/>
+
+                                <img th:src="${list.getInphoto1()}" style="width: 200px;height: 150px">
+                                <img th:src="${list.getInphoto2()}" style="width: 200px;height: 150px">
+                                <img th:src="${list.getInphoto3()}" style="width: 200px;height: 150px">
+                                <img th:src="${list.getInphoto4()}" style="width: 200px;height: 150px">
+                                <div id="container" style="width:95%;height:250px;margin-right: 0"></div>
+
+
+
+                            </div>
+
+
+
+
+                    <div class="operating_style Quick_operation menuUl">
+                        <ul class="menulist">
+                            <li class="column-name">
+                                <a th:href="@{mealdetail(storid=${list.getStoreid()})}" data-id="" name="add_Advertising.html" class="btn menuUl_title btn-white" title="查看伙食">查看伙食</a>
+                            </li>
+                            <li class="column-name">
+                                <a href="javascript:void(0)" data-id="" name="add_Article.html" class="btn menuUl_title btn-white" title="查看评论">查看评论</a>
+                            </li>
+
+                            <li class="column-name">
+                                <a th:href="@{chats(storeid=${list.getAccount()})}" title="联系机构" class="btn menuUl_title btn-white" name="administrators.html" data-id="111"><i class="iconfont icon-guanliyuan"></i>联系机构</a>
+                            </li>
+                        </ul>
+                    </div>
+
+
+
+
+                </div>
+                        <div class="Store_Introduction">
+                            <div class="title_name" style="background: #9fcdff;color: white">产品</div>
+                            <div class="info" th:if="${not#lists.isEmpty(p)}">
+                                <table style="width: 100%">
+                                    <thead>
+                                    <tr style="background: #a6e1ec">
+                                        <td style="width: 150px;text-align: center">
+                                            托管类型
+                                        </td>
+                                        <td style="text-align: center;width: 500px">
+                                            时间段
+                                        </td>
+                                        <td>
+                                            定金
+                                        </td>
+                                        <td>
+                                            总额
+                                        </td>
+                                        <td>
+                                            操作
+                                        </td>
+                                    </tr>
+                                    </thead>
+                                    <tbody th:each="pro:${p}">
+
+                                    <tr style="height: 50px;background: white">
+                                        <td style="color: #7EC4CC;text-align: center">
+                                           <h4> [[${pro.getTypes()}]]</h4>
+                                        </td>
+                                        <td style="color: #9fcdff;text-align: center">
+                                            [[${pro.getStartday()}]] -- [[${pro.getEndday()}]]
+                                        </td>
+                                        <td style="color: red" >
+                                            <h5>¥[[${pro.getEarmoney()}]]</h5>
+                                        </td>
+                                        <td style="color: red">
+                                            <h5>¥[[${pro.getAllmoney()}]]</h5>
+                                        </td>
+                                       <td >
+
+                                           <a th:href="@{/pay(proid=${pro.getProductid()})}"><p style="background: #1d7eb8;color: white;width: 60px;text-align: center">购买</p></a>
+<!--                                           <input type="button" onclick="judge([[${pro.getProductid()}]])" style="background: #5bc0de;color: white" value="购买"/>购买-->
+                                       </td>
+
+                                    </tr>
+                                    <tr style="height: 10px;background: #a6e1ec"></tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="Store_Introduction">
+                            <div class="title_name" style="background: #9fcdff;color: white">评论</div>
+                            <div style="height: 20px;background: white"></div>
+                        <div class="info" th:if="${not#lists.isEmpty(comts)}">
+                            <div th:each="co:${comts}">
+                                <div style="background:white ">
+                                    <p><h5>[[${co.getUserid()}]] &nbsp;&nbsp;&nbsp;&nbsp;[[${co.getGrade()}]]</h5></p>
+                                    <br/>
+                                   <P style="left: 20px"><h4> [[${co.getMessage()}]]</h4></P>
+                                </div>
+                                <div style="height: 10px;background:whitesmoke"></div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+</div>
+
+
+
+</body>
+</html>
+<!--地图-->
+<script type="text/javascript">
+var map = new BMap.Map("container");
+//在container容器中创建一个地图,参数container为div的id属性;
+var point = new BMap.Point(120.2,30.25);
+//创建点坐标
+map.centerAndZoom(point, 14);
+//初始化地图，设置中心点坐标和地图级别
+map.enableScrollWheelZoom();
+//激活滚轮调整大小功能
+map.addControl(new BMap.NavigationControl());
+//添加控件：缩放地图的控件，默认在左上角；
+map.addControl(new BMap.MapTypeControl());
+//添加控件：地图类型控件，默认在右上方；
+map.addControl(new BMap.ScaleControl());
+//添加控件：地图显示比例的控件，默认在左下方；
+map.addControl(new BMap.OverviewMapControl());  //添加控件：地图的缩略图的控件，默认在右下方； TrafficControl
+var search = new BMap.LocalSearch("中国", {
+
+    onSearchComplete: function(result){
+
+        if (search.getStatus() == BMAP_STATUS_SUCCESS){
+            var res = result.getPoi(0);
+            var point = res.point;
+            map.centerAndZoom(point, 11);
+        }
+
+    },renderOptions: {  //结果呈现设置，
+        map: map,
+        autoViewport: true,
+        selectFirstResult: true
+    } ,onInfoHtmlSet:function(poi,html){//标注气泡内容创建后的回调函数，有了这个，可以简单的改一下返回的html内容了。
+        // alert(html.innerHTML)
+    }//这一段可以不要，只不过是为学习更深层次应用而加入的。
+});
+function setCity(){
+    search.search(document.getElementById("cityName").value);
+}
+search.search(document.getElementById("cityName").value);
+</script>
+<script>
+    window.alert = function(msg){
+        var maskBg = '#0000002b';						//蒙版展示色
+        var zIndex = 999999;							//修改弹出层z-index,应为最顶层,避免被覆盖
+        var desColor = '#1f0000'						//提示信息字体颜色
+        var buttonVal = '确定';							//确定按钮名称
+        var btnBgColor = '#5bc0de';						//确定按钮背景颜色
+        var btnColor = 'white';							//确定按钮字体颜色
+        var btnAlign = 'right';							//按钮在水平位置,默认居中,变量值:left,center,right
+        var style = `
+			<style class="mask-style">
+				.box-sizing{
+					box-sizing: border-box;
+				}
+				.alertMask{
+					position: fixed;	/*生成绝对定位的元素，相对于浏览器窗口进行定位*/
+					display: flex;
+					display: webkit-flex;
+					flex-direction: row;
+					align-items: center;
+					justify-content: center;
+					width: 100%;
+					height: 100%;
+					top: 0;
+					left: 0;
+					z-index: `+zIndex+`;
+					background: `+maskBg+`;
+				}
+				.alertContainer{
+					min-width: 240px;	/*容器最小240px*/
+					max-width: 320px;	/*容器最大320px*/
+					background:#fff;
+					border: 1px solid `+maskBg+`;
+					border-radius: 3px;
+					color: `+desColor+`;
+					overflow: hidden;
+				}
+				.alertDes{
+					padding: 35px 30px;
+					text-align: center;
+					letter-spacing: 1px;
+					font-size: 14px;
+					color: `+desColor+`;
+				}
+				.alertDes img{
+					max-width: 100%;
+					height: auto;
+				}
+				.alertConfirmParent{
+					width: 100%;
+					padding: 20px 30px;
+					text-align: `+btnAlign+`;
+					box-sizing: border-box;
+					background: #f2f2f2;
+				}
+				.alertConfirmBtn{
+					cursor: pointer;
+					padding: 8px 10px;
+					border: none;
+					border-radius: 2px;
+					color: `+btnColor+`;
+					background-color: `+btnBgColor+`;
+					box-shadow: 0 0 2px `+btnBgColor+`;
+				}
+			</style>
+		`;
+
+        var head = document.getElementsByTagName('head')[0];
+        head.innerHTML += style		//头部加入样式,注意不可使用document.write()写入文件,否则出错
+
+        const body = document.getElementsByTagName('body')[0];
+
+        var alertMask = document.createElement('div');
+        var alertContainer = document.createElement('div');
+        var alertDes = document.createElement('div');
+        var alertConfirmParent = document.createElement('div');
+        var alertConfirmBtn = document.createElement('button');
+
+        body.append(alertMask);
+        alertMask.classList.add('alertMask');
+        alertMask.classList.add('box-sizing');
+
+        alertMask.append(alertContainer);
+        alertContainer.classList.add('alertContainer');
+        alertContainer.classList.add('box-sizing');
+
+        alertContainer.append(alertDes);
+        alertDes.classList.add('alertDes');
+        alertDes.classList.add('box-sizing');
+
+        alertContainer.append(alertConfirmParent);
+        alertConfirmParent.classList.add('alertConfirmParent');
+        alertConfirmParent.classList.add('box-sizing');
+
+        alertConfirmParent.append(alertConfirmBtn);
+        alertConfirmBtn.classList.add('alertConfirmBtn');
+        alertConfirmBtn.classList.add('box-sizing');
+        alertConfirmBtn.innerText = buttonVal;
+
+        //加载提示信息
+        alertDes.innerHTML = msg;
+        //关闭当前alert弹窗
+        function alertBtnClick(){
+            body.removeChild(alertMask);
+            maskStyle = head.getElementsByClassName('mask-style')[0];
+            head.removeChild(maskStyle);	//移除生成的css样式
+
+        }
+        alertConfirmBtn.addEventListener("click", alertBtnClick);
+    }
+
+</script>
+<script type="text/javascript" th:inline="javascript">
+
+    var status = [[${usermessage.getStatus()}]];
+    function judge() {
+        if (status==0){
+            alert("信息还未完善，请先填写信息")
+        }
+
+
+    }
+
+</script>
+<script th:inline="javascript">
+
+    function cancel_save(listid){
+
+        var index = top.layer.open({
+            type: 1,
+            title: '详情',
+            maxmin: true,
+            shadeClose:false,
+            area : ['500px' , ''],
+            zIndex:99999999999,
+            content:(''),
+            btn:['确定'],
+
+        })
+
+    }
+
+</script>
+

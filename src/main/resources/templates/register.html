@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Kodinger">
+    <title>My Login Page &mdash; Bootstrap 4 Login Page Snippet</title>
+    <link rel="stylesheet" type="text/css" href="../static/login/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/login/css/my-login.css">
+    <!--	网页地址暴露数据-->
+    <!--	<script>-->
+    <!--		function tourl() {-->
+    <!--         var email = document.getElementById("account").value;-->
+    <!--         var pass = document.getElementById("password").value;-->
+    <!--         location.href="sendemail?account="+email+"&password="+pass;-->
+    <!--		}-->
+    <!--	</script>-->
+    <!--	隐藏数据但是只能写一个，多写一条会覆盖-->
+    <!--	<script>-->
+    <!--		function tourl() {-->
+    <!--			var email = document.getElementById("account").value;-->
+    <!--			var pass = document.getElementById("password").value;-->
+    <!--			var f=document.createElement('form');-->
+    <!--			f.style.display='none';-->
+    <!--			f.action='sendemail';-->
+    <!--			f.method='post';-->
+    <!--			f.innerHTML='<input type="hidden" name="account" value="'+email+'"/>';-->
+    <!--			f.innerHTML='<input type="hidden" name="password" value="'+pass+'"/>'-->
+    <!--			document.body.appendChild(f);-->
+    <!--			f.submit();-->
+    <!--		}-->
+    <!--	</script>-->
+    <!--	没实现-->
+    <!--	<script>-->
+    <!--		function tourl() {-->
+    <!--			var email = document.getElementById("account").value;-->
+    <!--			var pass = document.getElementById("password").value;-->
+    <!--			form = $("<form></form>")-->
+    <!--			form.attr('action','sendemail')-->
+    <!--			form.attr('method','post')-->
+    <!--			input1 = $("<input type='hidden' name='account' value=email/>")-->
+    <!--			input2 = $("<input type='hidden' name='password' value='pass' />")-->
+    <!--			form.append(input1)-->
+    <!--			form.append(input2)-->
+    <!--			form.appendTo("body")-->
+    <!--			form.css('display','none')-->
+    <!--			form.submit()-->
+    <!--		}-->
+    <!--	</script>-->
+    <!--	ajax非表单形式-->
+    <script>
+        function tourl() {
+            var email = document.getElementById("account").value;
+            var pass = document.getElementById("password").value;
+            $.ajax({
+                type: "post",
+                url: "sendemail",
+                data: "account=" + email + "&password=" + pass,
+                async: false,
+                success:
+                    function (data) {
+                        document.getElementById("returncode").value = data;
+                        var code1 = document.getElementById("returncode").value;
+
+                        //alert(code1);
+                        // 	alert(data);
+
+                    },
+                error:
+                    function () {
+                    }
+            });
+        }
+
+        // var codeResult = "${codeResult}";
+    </script>
+</head>
+<body class="my-login-page">
+<section class="h-100">
+    <div class="container h-100">
+        <div class="row justify-content-md-center h-100">
+            <div class="card-wrapper">
+                <div class="brand">
+                    <img src="../static/login1.jpg">
+                </div>
+                <div class="card fat">
+                    <div class="card-body">
+                        <h4 class="card-title">登录</h4>
+                        <form th:action="@{registerJudge}" method="post">
+                            <!--								@{/news/{id}(id=${list.id},name=${name})}-->
+
+                            <!--							 required:提交时如果是空白不允许提交-->
+                            <!--								autofocus:页面打开时自动获得光标焦点-->
+
+                            <div class="form-group">
+                                <label for="account">邮箱</label>
+                                <input id="account" type="email" class="form-control" name="account" required autofocus>
+                            </div>
+                            <div id="judge" style="color: #aa1111">
+
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="password">密码</label>
+                                <input id="password" type="password" class="form-control" name="password" required
+                                       data-eye>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="code">验证码</label>
+                                <input id="code" type="text" class="form-control" name="code">
+                            </div>
+                            <input id="returncode" type="hidden" name="returncode">
+
+                            <div class="form-group">
+                                <label>
+                                    <!--										<input type="checkbox" name="aggree" value="1"> I agree to the Terms and Conditions-->
+                                    <!--										<a href="sendemail" class="cod-color">获取验证码</a>-->
+                                    <input type="button" onclick="tourl()" class="cod-color" th:value="获取验证码">
+                                </label>
+
+                            </div>
+
+
+                            <div class="form-group no-margin">
+                                <button type="submit" class="btn btn-primary btn-block">
+                                    注册
+                                </button>
+                            </div>
+                            <div class="margin-top20 text-center">
+                                已经有账号了? <a href="loginpage">登录</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="../static/login/js/jquery.min.js"></script>
+<script src="../static/login/js/bootstrap.min.js"></script>
+<script src="../static/login/js/my-login.js"></script>
+</body>
+</html>
+<script type="text/javascript">
+    $(function () {
+        var old_data = $("#account").val();
+        $("#account").change(function () {
+            var now_data = $("#account").val();
+            if(old_data != now_data){
+
+                $.ajax({
+                    url:"judgeAccount",
+                    type:"post",
+                    data:{"account":now_data},
+                    success:function (msg) {
+                        var resu = JSON.parse(msg);
+                         if(resu == false){
+                             document.getElementById("judge").innerHTML ="<p>" +"该账号已存在"+"</p>";
+
+                         }
+                         else{
+                             $("#judge").empty();
+                         }
+                    },
+
+                })
+            }
+
+        })
+
+    });
+</script>

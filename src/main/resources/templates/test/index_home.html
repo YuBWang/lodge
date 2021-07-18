@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<link href="../../static/jiemian1/css/SYSFrame.css" rel="stylesheet" type="text/css" />
+		<link href="../../static/jiemian1/font/iconfont.css" rel="stylesheet" type="text/css" />
+		<link href="../../static/jiemian1/css/module.css" rel="stylesheet" type="text/css" />
+		<link href="../../static/jiemian1/css/pages.css" rel="stylesheet" type="text/css" />
+		<title>系统框架首页</title>
+		<script src="../../static/jiemian1/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+		<script src="../../static/jiemian1/js/jquery.cookie.js" type="text/javascript"></script>
+		<script src="../../static/jiemian1/js/jquery.nicescroll.js" type="text/javascript"></script>
+		<script src="../../static/jiemian1/js/HUpages.js" type="text/javascript"></script>
+		<!--[if lt IE 9]>
+          <script src="../../static/jiemian1/js/html5shiv.js" type="text/javascript"></script>
+          <script src="../../static/jiemian1/js/css3-mediaqueries.js"  type="text/javascript"></script>
+        <![endif]-->
+	</head>
+
+	<body id="situation" class="backgrounddd" >
+
+			<div class="clearfix">
+				
+				<div class="">
+					<div class="box-module">
+						<div class="box-title">状态栏</div>
+						<div class="box-content">
+							<div class="Shops_info clearfix">
+								<div class="left_shop">
+									<div class="left_shop_logo">
+										<div class="shop_logo"><img th:src="${list.getStorephoto()}" onerror="this.src='../../static/jiemian2/images/noimage.gif',this.onerror=null"></div>
+										<a href="#" class="btn bg-deep-blue padding5">进入首页</a>
+									</div>
+									<div class="Shops_content">
+										<p><label class="name">店铺名称：</label>[[${list.getStorename()}]]</p>
+										<ul class="clearfix">
+											<li><label class="name">店铺地址：</label>[[${list.getAddress()}]]</li>
+											<li><label class="name">移动电话：</label>[[${list.getMobilephone()}]]</li>
+											<li><label class="name">固定电话：</label>[[${list.getFixedphone()}]]</li>
+											<li><label class="name">邮箱：</label>[[${list.getEmail()}]]</li><br/><br/>
+											<li><label class="name">简介：</label><p>11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</p></li>
+
+										</ul>
+									</div>
+									<div class="right_shop">
+										<p> 店铺动态评分：</p>
+										<ul>
+											<li><label class="name">相符描述</label><span class="score">4.5分</span></li>
+											<li><label class="name">服务态度</label><span class="score">4.0分</span></li>
+
+										</ul>
+									</div>
+								</div>
+								<div class="operating_style Quick_operation menuUl">
+									<ul class="menulist">
+										<li class="column-name">
+											<a href="javascript:void(0)" data-id="" name="add_Advertising.html" class="btn menuUl_title btn-white" title="查看伙食">查看伙食</a>
+										</li>
+										<li class="column-name">
+											<a href="javascript:void(0)" data-id="" name="add_Article.html" class="btn menuUl_title btn-white" title="查看评论">查看评论</a>
+										</li>
+
+										<li class="column-name">
+											<a href="javascript:void(0)" title="联系平台" class="btn menuUl_title btn-white" name="administrators.html" data-id="111"><i class="iconfont icon-guanliyuan"></i>联系平台</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script src="js/dist/echarts.js" type="text/javascript"></script>
+<script>
+	//内页框架
+	$(function() {
+		$("#situation").Hupage({
+			scrollbar: function(e) {
+				e.niceScroll({
+					cursorcolor: "#dddddd",
+					cursoropacitymax: 1,
+					touchbehavior: false,
+					cursorwidth: "3px",
+					cursorborder: "0",
+					cursorborderradius: "3px",
+				});
+			},
+			expand: function(thisBox, settings) {
+				settings.scrollbar(thisBox); //设置当前页滚动样式
+			}
+		})
+	})
+</script>

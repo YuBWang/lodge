@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jmu.lodgesystem.dao.SigninMapper">
+    <select id="findSignList" parameterType="String" resultType="com.jmu.lodgesystem.entity.signList">
+       select Orderlist.storeid,Orderlist.userid,Orderlist.orderid,UseMessage.username,UseMessage.childname,UseMessage.phone,UseMessage.school,UseMessage.grades,UseMessage.classes from Orderlist,UseMessage where Orderlist.userid=UseMessage.userid and Orderlist.`status`!=4 and Orderlist.storeid=#{id} and Orderlist.`status`!=3
+    </select>
+    <insert id="insertSign" parameterType="com.jmu.lodgesystem.entity.Signin">
+        insert into Signin(signinid,storeid,userid,orderid,times,status,tomessage,photolist) values (#{signinid},#{storeid},#{userid},#{orderid},#{times},#{status},#{tomessage},#{photolist})
+    </insert>
+    <select id="findSignid" parameterType="String" resultType="String">
+        select distinct signinid from Signin where storeid=#{id} group by signinid order by times desc limit 1
+    </select>
+    <select id="findAll" parameterType="String" resultType="com.jmu.lodgesystem.entity.Signin">
+        select Signin.signinid,Signin.storeid,Signin.userid,Signin.orderid,Signin.times,Signin.status,Signin.tomessage,Signin.photolist from Signin where signinid=#{id}
+    </select>
+    <update id="upSignState" parameterType="String">
+        update Signin set status=1 where signinid=#{sid} and userid=#{uid} and orderid=#{listid}
+    </update>
+    <select id="findSign" parameterType="String" resultType="com.jmu.lodgesystem.entity.signList">
+         select Orderlist.storeid,Orderlist.userid,Orderlist.orderid,UseMessage.username,UseMessage.childname,UseMessage.phone,UseMessage.school,UseMessage.grades,UseMessage.classes from Orderlist,UseMessage where Orderlist.userid=UseMessage.userid  and Orderlist.storeid=#{sid} and Orderlist.userid=#{uid} and Orderlist.orderid=#{listid}
+    </select>
+    <select id="findThree" parameterType="String" resultType="com.jmu.lodgesystem.entity.Signin">
+        select Signin.signinid,Signin.storeid,Signin.userid,Signin.orderid,Signin.times,Signin.status,Signin.tomessage,Signin.photolist from Signin where userid=#{id} and orderid=#{listid} ORDER BY times DESC limit 3
+    </select>
+    <update id="upPhotoList" parameterType="String">
+        update Signin set photolist=#{photo} where signinid=#{sid} and userid=#{uid} and orderid=#{listid}
+    </update>
+    <update id="upMessage" parameterType="String">
+        update Signin set tomessage=#{messages} where signinid=#{sid} and userid=#{uid} and orderid=#{listid}
+    </update>
+    <select id="findSignOne" parameterType="String" resultType="com.jmu.lodgesystem.entity.Signin">
+       select Signin.signinid,Signin.storeid,Signin.userid,Signin.orderid,Signin.times,Signin.status,Signin.tomessage,Signin.photolist from Signin where userid=#{uid} and signinid=#{sid} and orderid=#{listid}
+    </select>
+    <select id="findTodaySign" parameterType="String" resultType="com.jmu.lodgesystem.entity.Signin">
+        select Signin.signinid,Signin.storeid,Signin.userid,Signin.orderid,Signin.times,Signin.status,Signin.tomessage,Signin.photolist from Signin where userid=#{id}  order by times desc LIMIT 1
+    </select>
+    <select id="findeveryDay" parameterType="String" resultType="com.jmu.lodgesystem.entity.Signin">
+        select Signin.signinid,Signin.storeid,Signin.userid,Signin.orderid,Signin.times,Signin.status,Signin.tomessage,Signin.photolist from Signin where userid=#{id}  and CONVERT(times,DATETIME) like #{data} limit 1
+    </select>
+
+</mapper>

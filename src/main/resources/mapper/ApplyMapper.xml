@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jmu.lodgesystem.dao.ApplyMapper">
+   <insert id="inserts" parameterType="com.jmu.lodgesystem.entity.Apply">
+       insert into Apply(storeid,applystatus,reasons) values (#{storeid},#{applystatus},#{reasons})
+   </insert>
+    <update id="upstatus" parameterType="com.jmu.lodgesystem.entity.Apply">
+        update Apply set applystatus=#{applystatus},reasons=#{reasons} where  storeid=#{storeid}
+    </update>
+    <select id="returnStatus" parameterType="String" resultType="int">
+        select applystatus from Apply where storeid=#{storeid}
+    </select>
+    <select id="returnAply" parameterType="String" resultType="com.jmu.lodgesystem.entity.Apply">
+        select * from Apply where storeid=#{storeid}
+    </select>
+    <delete id="deleteOne" parameterType="String">
+        delete from Apply where storeid=#{storeid}
+    </delete>
+</mapper>
